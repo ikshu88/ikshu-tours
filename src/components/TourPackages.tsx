@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { MapPin, Camera, ChevronLeft, ChevronRight, Compass, TreePalm, Mountain, Binoculars, Sparkles, Clock, Users } from 'lucide-react'
+import { MapPin, Camera, ChevronLeft, ChevronRight, Compass, TreePalm, Mountain, Binoculars, Sparkles, Star, Clock, Users } from 'lucide-react'
 import { cn } from '@/lib/cn'
 
 interface TourImage {
@@ -19,6 +19,7 @@ interface TourPackage {
   highlights: string[]
   duration: string
   groupSize: string
+  rating: number
   images: TourImage[]
 }
 
@@ -34,10 +35,11 @@ const tours: TourPackage[] = [
     highlights: ['Sigiriya Lion Rock Climb', 'Dambulla Cave Temple', 'Polonnaruwa Ruins', 'Ancient Bathing Ponds'],
     duration: '3-4 Days',
     groupSize: '2-12',
+    rating: 4.9,
     images: [
-      { src: 'https://images.unsplash.com/photo-1711982537799-96f3b8d88c4f?w=1200&q=80&auto=format', alt: 'Aerial view of Sigiriya Rock Fortress', credit: 'Sander Traa' },
-      { src: 'https://images.unsplash.com/photo-1725972198931-d7fe51e80188?w=1200&q=80&auto=format', alt: 'Golden Buddha statues in Dambulla Cave Temple', credit: 'Unsplash' },
-      { src: 'https://images.unsplash.com/photo-1610257696823-eab8e3bcd3e2?w=1200&q=80&auto=format', alt: 'Sigiriya Rock Fortress from the gardens', credit: 'Dylan Shaw' }
+      { src: 'https://images.unsplash.com/photo-1711982537799-96f3b8d88c4f?w=1200&q=80&auto=format', alt: 'Aerial view of Sigiriya Rock Fortress rising from lush jungle', credit: 'Sander Traa' },
+      { src: 'https://images.unsplash.com/photo-1725972198931-d7fe51e80188?w=1200&q=80&auto=format', alt: 'Golden Buddha statues in the ancient Dambulla Cave Temple', credit: 'Unsplash' },
+      { src: 'https://images.unsplash.com/photo-1610257696823-eab8e3bcd3e2?w=1200&q=80&auto=format', alt: 'Sigiriya Rock Fortress seen from the gardens below', credit: 'Dylan Shaw' }
     ]
   },
   {
@@ -51,9 +53,10 @@ const tours: TourPackage[] = [
     highlights: ['Kandy-to-Ella Train Ride', 'Tea Factory Visit', 'Little Adams Peak Trek', 'Ravana Waterfall'],
     duration: '3-5 Days',
     groupSize: '2-10',
+    rating: 4.8,
     images: [
-      { src: 'https://images.unsplash.com/photo-1727313639663-f3b7d0e5a6ef?w=1200&q=80&auto=format', alt: 'Tea workers on lush green plantation', credit: 'Unsplash' },
-      { src: 'https://images.unsplash.com/photo-1712971149830-8cfa6dba2b38?w=1200&q=80&auto=format', alt: 'Iconic blue train through misty forest', credit: 'Unsplash' },
+      { src: 'https://images.unsplash.com/photo-1727313639663-f3b7d0e5a6ef?w=1200&q=80&auto=format', alt: 'Tea workers harvesting leaves on a lush green plantation', credit: 'Unsplash' },
+      { src: 'https://images.unsplash.com/photo-1712971149830-8cfa6dba2b38?w=1200&q=80&auto=format', alt: 'Iconic blue train traveling through misty green forest', credit: 'Unsplash' },
       { src: 'https://images.unsplash.com/photo-1733509454438-4c647d445112?w=1200&q=80&auto=format', alt: 'Workers plucking tea leaves on mountain slopes', credit: 'Unsplash' }
     ]
   },
@@ -68,9 +71,10 @@ const tours: TourPackage[] = [
     highlights: ['Mirissa Beach', 'Galle Fort Sunset', 'Whale Watching', 'Coconut Tree Hill'],
     duration: '3-4 Days',
     groupSize: '2-8',
+    rating: 4.9,
     images: [
-      { src: 'https://images.unsplash.com/photo-1744631458840-b1e1b5c5e3d7?w=1200&q=80&auto=format', alt: 'Tropical Mirissa Beach with turquoise water', credit: 'Zoshua Colah' },
-      { src: 'https://images.unsplash.com/photo-1748369228691-e8a3c2d8e1f4?w=1200&q=80&auto=format', alt: 'Mirissa shoreline with golden sand', credit: 'Unsplash' },
+      { src: 'https://images.unsplash.com/photo-1744631458840-b1e1b5c5e3d7?w=1200&q=80&auto=format', alt: 'Tropical Mirissa Beach with turquoise water and palm trees', credit: 'Zoshua Colah' },
+      { src: 'https://images.unsplash.com/photo-1748369228691-e8a3c2d8e1f4?w=1200&q=80&auto=format', alt: 'Scenic Mirissa shoreline with golden sand', credit: 'Unsplash' },
       { src: 'https://images.unsplash.com/photo-1748369228401-af1e3b2d1c98?w=1200&q=80&auto=format', alt: 'Rocky beach with turquoise ocean and palm trees', credit: 'Unsplash' }
     ]
   },
@@ -85,10 +89,11 @@ const tours: TourPackage[] = [
     highlights: ['Yala Leopard Tracking', 'Udawalawe Elephants', 'Bird Watching', 'Minneriya Gathering'],
     duration: '2-4 Days',
     groupSize: '2-6',
+    rating: 4.7,
     images: [
-      { src: 'https://images.unsplash.com/photo-1675296535504-e18b1a70e3a8?w=1200&q=80&auto=format', alt: 'Herd of elephants on lush green grass', credit: 'Unsplash' },
-      { src: 'https://images.unsplash.com/photo-1675296535490-e0f80e0b28c0?w=1200&q=80&auto=format', alt: 'Majestic elephant walking through green field', credit: 'Sachindra Chalaka' },
-      { src: 'https://images.unsplash.com/photo-1666442990289-4c14e5a9f2b1?w=1200&q=80&auto=format', alt: 'Large elephant in dense green forest', credit: 'Unsplash' }
+      { src: 'https://images.unsplash.com/photo-1675296535504-e18b1a70e3a8?w=1200&q=80&auto=format', alt: 'Herd of elephants on lush green grass in Udawalawe', credit: 'Unsplash' },
+      { src: 'https://images.unsplash.com/photo-1675296535490-e0f80e0b28c0?w=1200&q=80&auto=format', alt: 'Majestic elephant walking through a green field', credit: 'Sachindra Chalaka' },
+      { src: 'https://images.unsplash.com/photo-1666442990289-4c14e5a9f2b1?w=1200&q=80&auto=format', alt: 'Large elephant wandering through dense green forest', credit: 'Unsplash' }
     ]
   },
   {
@@ -102,10 +107,11 @@ const tours: TourPackage[] = [
     highlights: ['Personalized Itinerary', 'Private Chauffeur', 'Flexible Schedule', 'Local Experiences'],
     duration: 'Flexible',
     groupSize: '1-20',
+    rating: 5.0,
     images: [
-      { src: 'https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=1200&q=80&auto=format', alt: 'Galle Lighthouse along the coastline', credit: 'Unsplash' },
+      { src: 'https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=1200&q=80&auto=format', alt: 'Galle Lighthouse standing tall along the coastline', credit: 'Unsplash' },
       { src: 'https://images.unsplash.com/photo-1704857135721-e0c88f1c1b85?w=1200&q=80&auto=format', alt: 'Lighthouse and ocean view', credit: 'Unsplash' },
-      { src: 'https://images.unsplash.com/photo-1586526399069-e50c0e59fb32?w=1200&q=80&auto=format', alt: 'Scenic train journey through green jungle', credit: 'Unsplash' }
+      { src: 'https://images.unsplash.com/photo-1586526399069-e50c0e59fb32?w=1200&q=80&auto=format', alt: 'Scenic train journey through lush green jungle', credit: 'Unsplash' }
     ]
   }
 ]
@@ -127,9 +133,7 @@ function ImageGallery({ images, tourId }: { images: TourImage[]; tourId: string 
       <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
         {images.map((_, i) => (<button key={i} onClick={(e) => { e.stopPropagation(); setCurrent(i) }} className={cn('h-1.5 rounded-full transition-all duration-300', i === current ? 'w-6 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/70')} />))}
       </div>
-      <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/30 backdrop-blur-sm rounded-full px-2.5 py-1 text-xs text-white/90">
-        <Camera className="w-3 h-3" /><span>{current + 1}/{images.length}</span>
-      </div>
+      <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-black/30 backdrop-blur-sm rounded-full px-2.5 py-1 text-xs text-white/90"><Camera className="w-3 h-3" /><span>{current + 1}/{images.length}</span></div>
     </div>
   )
 }
@@ -148,6 +152,7 @@ function TourCard({ tour }: { tour: TourPackage }) {
               <p className="text-sm text-gray-500 mt-0.5">{tour.subtitle}</p>
             </div>
           </div>
+          <div className="flex items-center gap-1 bg-amber-50 rounded-lg px-2 py-1 shrink-0"><Star className="w-4 h-4 text-amber-500 fill-amber-500" /><span className="text-sm font-semibold text-amber-700">{tour.rating}</span></div>
         </div>
         <p className={cn('text-gray-600 text-sm leading-relaxed mb-4', !isExpanded && 'line-clamp-3')}>{tour.description}</p>
         <button onClick={() => setIsExpanded(!isExpanded)} className="text-sm font-medium text-blue-600 hover:text-blue-700 mb-4 self-start transition-colors">{isExpanded ? 'Show less' : 'Read more...'}</button>
